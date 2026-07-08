@@ -28,6 +28,8 @@ email-validator==2.3.0
     # via -r requirements.in
 fastapi==0.128.8
     # via -r requirements.in
+gunicorn==26.0.0
+    # via -r requirements.in
 h11==0.16.0
     # via uvicorn
 httptools==0.8.0
@@ -40,6 +42,8 @@ mako==1.3.12
     # via alembic
 markupsafe==3.0.3
     # via mako
+packaging==26.2
+    # via gunicorn
 psycopg[binary]==3.2.13
     # via -r requirements.in
 psycopg-binary==3.2.13
