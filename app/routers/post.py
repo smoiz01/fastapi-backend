@@ -29,11 +29,14 @@ def get_posts(session: SessionDep, current_user: models.User = Depends(oauth2.ge
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.PostResponse)
 def create_posts(post: schemas.PostCreate, session: SessionDep, current_user: models.User = Depends(oauth2.get_current_user)):
 
-    new_post = models.Post(**post.dict(), user_id= current_user.id)
+    new_post = models.Post(**post.model_dump(), user_id= current_user.id)
     session.add(new_post)
     session.commit()
     session.refresh(new_post)
-    return new_post
+    return {
+        **new_post.model_dump(), 
+        "votes": 0
+    }
 
 @router.get("/{id}", response_model=schemas.PostResponse)
 def get_post(id: int, session: SessionDep, current_user: models.User = Depends(oauth2.get_current_user)):
@@ -85,4 +88,11 @@ def update_post(id: int, post: schemas.PostCreate, session: SessionDep, current_
     session.commit()
     session.refresh(updated_post)
 
-    return updated_post
+    vote_count = session.exec(
+        select(func.count()).select_from(models.Vote).where(models.Vote.post_id == id)
+    ).one()
+
+    return {
+        **updated_post.model_dump(),
+        "votes": vote_count
+    }

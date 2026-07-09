@@ -27,7 +27,6 @@ class PostResponse(PostBase):
     id: int
     created: datetime
     user_id: int
-    user: UserResponse
     votes: int
     model_config = {"from_attributes": True}
 
