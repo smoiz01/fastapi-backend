@@ -21,6 +21,7 @@ env/
 .env
 app/.env
 *.env
+tests/.env.test
 
 # IDE/editor
 .vscode/

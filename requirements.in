@@ -9,3 +9,5 @@ pwdlib[argon2]==0.2.1
 alembic==1.16.5
 email-validator==2.3.0
 gunicorn
+pytest
+httpx

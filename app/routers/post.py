@@ -50,7 +50,6 @@ def get_post(id: int, session: SessionDep, current_user: models.User = Depends(o
     post_return = {
             **post.model_dump(),
             "votes": vote_count,
-            "user": post.user
         }
         
     return post_return
@@ -82,7 +81,7 @@ def update_post(id: int, post: schemas.PostCreate, session: SessionDep, current_
     if updated_post.user_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="not authorized to perform the requested action")
     
-    updated_post.sqlmodel_update(post.dict())
+    updated_post.sqlmodel_update(post.model_dump())
 
     session.add(updated_post)
     session.commit()

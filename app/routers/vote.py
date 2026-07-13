@@ -1,9 +1,8 @@
 from fastapi import status, HTTPException, APIRouter, Depends
 from sqlmodel import select
-from typing import List
 
 from app import oauth2
-from .. import models, schemas, utils
+from .. import models, schemas
 from ..database import SessionDep
 
 router = APIRouter(
