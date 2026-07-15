@@ -21,6 +21,6 @@ app.include_router(vote.router)
 
 @app.get("/")
 def start():
-    return "hello world"
+    return "pushing out to ubuntu"
 
 
