@@ -21,6 +21,6 @@ app.include_router(vote.router)
 
 @app.get("/")
 def start():
-    return "pushing out to ubuntu"
+    return {"message": "pushing out to ubuntu"}
 
 
